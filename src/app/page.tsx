@@ -1,13 +1,16 @@
+import { Container } from '@/components/Container';
+import { Header } from '@/components/Header';
 import { PostsList } from '@/components/PostsList';
 import { SpinLoader } from '@/components/SpinLoader';
 import { Suspense } from 'react';
+import { PostFeatured } from '@/components/PostFeatured';
 
 export default async function HomePage() {
   return (
-    <div className='text-slate-900 bg-slate-100 min-h-screen dark:text-slate-100 dark:bg-slate-900'>
-      <header>
-        <h1 className='text-6xl font-bold text-center py-8'>Aqui é a HEADER</h1>
-      </header>
+    <Container>
+      <Header />
+
+      <PostFeatured />
 
       <Suspense fallback={<SpinLoader />}>
         <PostsList />
@@ -16,6 +19,6 @@ export default async function HomePage() {
       <footer>
         <h1 className='text-6xl font-bold text-center py-8'>Aqui é a FOOTER</h1>
       </footer>
-    </div>
+    </Container>
   );
 }
