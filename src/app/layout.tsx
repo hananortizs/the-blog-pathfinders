@@ -3,6 +3,7 @@ import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
 
 import './globals.css';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: {
@@ -23,11 +24,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
           <Container>
             <Header />
             {children}
-            <footer>
-              <h1 className='text-6xl font-bold text-center py-8'>
-                Aqui é a FOOTER
-              </h1>
-            </footer>
+            <Footer />
           </Container>
         </div>
       </body>
