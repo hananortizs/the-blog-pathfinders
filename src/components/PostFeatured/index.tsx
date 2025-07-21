@@ -1,10 +1,12 @@
 import { PostCoverImage } from '../PostCoverImage';
-import { PostHeading } from '../PostHeading';
+import { PostSummary } from '../PostSummary';
 import clsx from 'clsx';
+import { findAllPublicPosts } from '@/lib/post/queries';
 
-export function PostFeatured() {
-  const slug = 'asd';
-  const postLink = `/post/${slug}`;
+export async function PostFeatured() {
+  const posts = await findAllPublicPosts();
+  const post = posts[0];
+  const postLink = `/post/${post.slug}`;
   return (
     <section
       className={clsx('grid grid-cols-1 gap-8 mb-16 group', 'sm:grid-cols-2')}
@@ -14,28 +16,18 @@ export function PostFeatured() {
         imageProps={{
           width: 1200,
           height: 720,
-          src: '/images/bryen_9.png',
-          alt: 'Alt da Imagem',
+          src: post.coverImageUrl,
+          alt: post.title,
           priority: true,
         }}
       />
-      <div className='flex flex-col mb-4 sm:justify-center'>
-        <time
-          className='text-slate-600 block text-sm/tight'
-          dateTime='2025-07-12'
-        >
-          12/07/2025 12:00
-        </time>
-        <PostHeading url={postLink} as='h1'>
-          Lorem ipsum dolor sit amet.
-        </PostHeading>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-          reprehenderit, accusantium fugiat saepe itaque nam. Hic nisi
-          temporibus tempora incidunt recusandae nihil dolores aliquid
-          consectetur sit quis! Nulla, ab magni?
-        </p>
-      </div>
+      <PostSummary
+        postHeading={'h1'}
+        postLink={postLink}
+        createdAt={post.createdAt}
+        title={post.title}
+        excerpt={post.excerpt}
+      ></PostSummary>
     </section>
   );
 }
